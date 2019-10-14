@@ -372,7 +372,6 @@ var donutChartController = (function() {
     const pie = d3.pie()
         .sort(null)//.sort( (a, b) => d3.descending(b.value, a.value))
         .value(d => d.value) // value on which the angles will be calculated
-//    console.log([2,5,1,6,33,22,12].sort(function(a,b) { return a - b}))
     
     // path "d" generator function
     const arcPath = d3.arc()
@@ -381,11 +380,7 @@ var donutChartController = (function() {
     
     
     // color definition
-    /*const gradient = d3.scaleLinear()
-        .domain(0, data.length)
-    var interpolate = d3.interpolateRgb("steelblue", "brown")
-        console.log(interpolate())
-    */
+ 
     const colorInc = d3.scaleLinear()
         .range(["#28B9B5", "#b0eeeb"])
         .interpolate(d3.interpolateRgb)
@@ -397,13 +392,10 @@ var donutChartController = (function() {
     
     // Transitions 
     const arcTweenEnter = (d) => {
-//        console.log(d)
         let i = d3.interpolate( d.endAngle, d.startAngle )
         
         return function(t) {
             d.startAngle = i(t);
-//            console.log("DUPA", d)
-//            console.log(arcPath(d))
              return arcPath(d);
         }
     };
@@ -425,8 +417,6 @@ var donutChartController = (function() {
         this._current = i(1);
         
         return function(t) {
-//            console.log("CURRENT 2", this._current)
-//            this._current = i(t); // this line not in the course
             return arcPath(i(t)) // return arcPath(i(t))
         }
     }
@@ -489,23 +479,19 @@ var donutChartController = (function() {
         // update with new entry from UI
         updateNewItem: function(item) {
             newItem = item; // {type: "inc", description: "wea", value: 234}
-            console.log("1. UpdateNewItem")
         },
         
         
         // update with new month selected from the dropdown month menu
         addMonth: function(item) {
             month = item;
-            console.log("1. ADD MONTH", month)
         },
         
         
         // send new entry from UI to the DB to the selected month collection
         pushToDB: function() {
             db.collection(month).add(newItem).then(res => {
-                console.log("2. pushToDB")
-                console.log(newItem)
-                console.log(month)
+                
             })
         },
         
@@ -518,15 +504,12 @@ var donutChartController = (function() {
         
         // reset data[] after selecting the new month
         resetData: function() {
-             console.log("2. RESET DATA")
             data = [];    
         },
         
         
         // Delete a single record from the firebase DB
         deleteSingleDBItem: function(month, id) {
-            console.log("DELETE SINGLE item in Firebase")
-            console.log(month, id)
             
             db.collection(month).doc(id).delete()
         },
@@ -538,37 +521,25 @@ var donutChartController = (function() {
         // DB update - listener for DB changes 
             db.collection(month).onSnapshot(res => {    
                 let dataSorted = [];
-            console.log("!!!LISTEN TO DB!!!!!")
-        //        console.log(res)
-//                console.log(res.docChanges())
                 res.docChanges().forEach(elem => {
 
                     var item = {...elem.doc.data(), dbID: elem.doc.id}
                     switch (elem.type) {
                             
                         case "added": 
-                            console.log("ADDED")
-                            console.log(item)
                             data.push(item);
                             break;
                         case "modified":
-                            console.log("MODIFIED")
-                            console.log(item)
                             let index = data.findIndex(d => d.id === item.id);
                             data[index] = item;
                             break;
                         case "removed":
-                            console.log("REMOVED")
-                            console.log(item)
                             data = data.filter(d => d.dbID != item.dbID);
                             break;
                         default:
                             break;
                     }
                 })
-                
-                console.log("DATA After SWITCH:")
-                console.log(data)
                 
                 // sort data[] to group "exp" and "inc"
                 data.forEach(function(el) {
@@ -597,26 +568,20 @@ var donutChartController = (function() {
         
         // d3 update(data) function (run when new item added or new month selected) 
         graphUpdate: function(data) {
-            console.log("!!GRAPH UPDATE ", data)
             
             // Set color
-//            console.log(data.length)
             colorExp.domain([0, data.length])
             colorInc.domain([0, data.length])
             
-            // call legend
-            // legendGroup.call(legend);
             
             // Join enhanced pie(data) to path elements
             const path = graph.selectAll("path")
                 .data(pie(data))
-//            console.log(path)
             
             // remove exit() selection
             path.exit().remove()
                 .transition().duration(750)
                     .attrTween("d", arcTweenExit)
-//            console.log("EXIT", path.exit())
             
             // handle the current DOM path updates
             path
@@ -633,12 +598,10 @@ var donutChartController = (function() {
             path.enter()
                 .append("path")
                     .attr("class", "arc")
-//                    .attr("d", d => arcPath(d))
                     .attr("stroke", "#fff")
                     .attr("stroke-width", 2)
                     .attr("fill", (d, i) => {
-//                        console.log(d)
-//                        console.log(i)
+//                    
                         return d.data.type == "exp" ? colorExp(i * 0.7) : colorInc(i*1.5)
                     })
                     .each(function(d){this._current = d})
