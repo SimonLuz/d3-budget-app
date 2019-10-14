@@ -1,0 +1,84 @@
+[
+  
+  
+  {
+    "year": 2016,
+    "quarter": 1,
+    "type": "car",
+    "value": 240
+  },
+  {
+    "year": 2016,
+    "quarter": 2,
+    "type": "car",
+    "value": 250
+  },
+  {
+    "year": 2016,
+    "quarter": 3,
+    "type": "car",
+    "value": 300
+  },
+  {
+    "year": 2016,
+    "quarter": 4,
+    "type": "car",
+    "value": 270
+  }, 
+  
+  {
+    "year": 2017,
+    "quarter": 1,
+    "type": "car",
+    "value": 260
+  },
+  {
+    "year": 2017,
+    "quarter": 2,
+    "type": "car",
+    "value": 320
+  },
+  {
+    "year": 2017,
+    "quarter": 3,
+    "type": "car",
+    "value": 370
+  },
+  {
+    "year": 2017,
+    "quarter": 4,
+    "type": "car",
+    "value": 310
+  },
+  
+  {
+    "year": 2018,
+    "quarter": 1,
+    "type": "car",
+    "value": 300
+  },
+  {
+    "year": 2018,
+    "quarter": 2,
+    "type": "car",
+    "value": 400
+  },
+  {
+    "year": 2018,
+    "quarter": 3,
+    "type": "car",
+    "value": 340
+  },
+  {
+    "year": 2018,
+    "quarter": 4,
+    "type": "car",
+    "value": 303
+  }
+  
+  
+  
+  
+  
+  
+]

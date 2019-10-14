@@ -1,0 +1,77 @@
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Media querries*/
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+ @media only screen and (max-width: 900px) {
+    .top {
+        flex-direction:column;
+    }
+     
+    .budget {
+        padding: 10px;
+        align-self: center;
+        width: 350px;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+     
+     
+     .add {
+         padding: 10px;
+         
+     } 
+     
+     .add__container {
+         display: flex;
+         justify-content: center;
+         flex-direction: row;
+         flex-wrap: wrap;
+         width: 80vw;
+         height: 120px;
+     }
+     
+     .add__type {
+/*         flex-grow: 1;*/
+         width: 20%;
+         margin-right: 5%;
+         height: 40%;
+         order: 2;
+         align-self: center;
+     }
+     
+     .add__description {
+/*         flex-grow: 2;*/
+         width: 80%;
+         margin: 0;
+         height: 40%;
+         order: 1;
+     }
+     
+     .add__value {
+         width: 40%;
+         margin-right: 30px;
+         height: 40%;
+         align-self: center;
+         order: 3;
+     }
+     
+     .add__btn {
+         width: 50px;
+         order: 3;
+     }
+     
+     
+     .container {
+         width: 80vw;
+     }
+     
+     .income, .expenses {
+         width: 80%;
+         margin-right: 0;
+         margin-bottom: 30px;
+         
+     }
+     
+     
+     
+}
