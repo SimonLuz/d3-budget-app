@@ -205,8 +205,9 @@ D3 Charts styles
     font-size: 12px;
 }
 
-.legend__barChart {
+.legend__barChart text.label{
     font-size: 14px;
+    fill: white;
 }
 
 .legend__donutChart {

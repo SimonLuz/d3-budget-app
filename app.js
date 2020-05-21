@@ -636,7 +636,6 @@ var controller = (function(budgetCtrl, UICtrl, DBCtrl) {
     
     
     var DOM = UICtrl.getDOMStrings();
-        console.log(DOM)
     
     
     // 4. EventListener function 
@@ -1202,7 +1201,7 @@ var d3LineChart = (function(budgetCtrl, UICtrl) {
   
   // UPDATE function
   const update = function(data) {
-    
+    console.log('UPDATE DATA: ', data)
 //  Extract number values from data arr (for y-axis range)
     let getValue = (function() {
       var arr = [];
@@ -1246,7 +1245,7 @@ var d3LineChart = (function(budgetCtrl, UICtrl) {
     circles 
       .enter()
         .append("circle") 
-        .attr("class", `circle-${type} line-el ${type}`)
+        .attr("class", `circle-${type} line-el ${type} active-line`)
         .attr("type", `${type}`)
         .attr("cx", (d, i) => xScale(i))
         .attr("cy", (d) => yScale(d[type]))
@@ -1256,7 +1255,7 @@ var d3LineChart = (function(budgetCtrl, UICtrl) {
       
       graph.append("path")
         .data([data])
-        .attr("class", `path-${type} line-el ${type}`)
+        .attr("class", `path-${type} line-el ${type} active-line`)
         .attr("type", `${type}`)
         .attr("fill", "none")
         .attr("stroke", d => color(type))
@@ -1322,8 +1321,6 @@ var d3LineChart = (function(budgetCtrl, UICtrl) {
   // EventListener for hover over circles
     graph.selectAll("circle")
       .on("mouseover", (d,i,n) => {
-//      console.log(d,i,n)
-//      console.log(n[i])
       
       dottedOn(d, i, n);
       circleOn(d, i, n)
@@ -1335,7 +1332,112 @@ var d3LineChart = (function(budgetCtrl, UICtrl) {
   }
   
   
-  const dataCSV = d3.csv("pastData.csv", (d) => {
+const graphData = [
+ {
+   date: "2016-1",
+   car: 610,
+   home: 950,
+   food: 320,
+   entertainment: 130,
+   health: 230
+ },
+ {
+   date: "2016-2",
+   car: 540,
+   home: 1110,
+   food: 420,
+   entertainment: 98,
+   health: 180
+ },
+ {
+   date: "2016-3",
+   car: 380,
+   home: 950,
+   food: 240,
+   entertainment: 67,
+   health: 156
+ },
+ {
+   date: "2016-4",
+   car: 610,
+   home: 670,
+   food: 140,
+   entertainment: 101,
+   health: 124
+ },
+ {
+   date: "2017-1",
+   car: 440,
+   home: 850,
+   food: 420,
+   entertainment: 124,
+   health: 156
+ },
+ {
+   date: "2017-2",
+   car: 530,
+   home: 450,
+   food: 280,
+   entertainment: 88,
+   health: 168
+ },
+ {
+   date: "2017-3",
+   car: 740,
+   home: 1010,
+   food: 310,
+   entertainment: 67,
+   health: 197
+ },
+ {
+   date: "2017-4",
+   car: 840,
+   home: 1060,
+   food: 720,
+   entertainment: 76,
+   health: 168
+ },
+ {
+   date: "2018-1",
+   car: 640,
+   home: 950,
+   food: 320,
+   entertainment: 65,
+   health: 199
+ },
+ {
+   date: "2018-2",
+   car: 420,
+   home: 1010,
+   food: 540,
+   entertainment: 99,
+   health: 210
+ },
+ {
+   date: "2018-3",
+   car: 370,
+   home: 750,
+   food: 160,
+   entertainment: 120,
+   health: 240
+ },
+ {
+   date: "2018-4",
+   car: 240,
+   home: 650,
+   food: 420,
+   entertainment: 134,
+   health: 255
+ }
+]
+  
+  
+  // if data is used as a separate .csv file, use this promise below:
+/*  const dataCSV = d3.csv("pastData.csv", (d) => {
+//  const dataCSV = d3.json(dataJSON, (d) => {
+    
+    console.log("JAJESTEM !!!!!!!!!")
+    
     d.car = +d.car; 
     d.home = +d.home;
     d.food = +d.food;
@@ -1344,12 +1446,14 @@ var d3LineChart = (function(budgetCtrl, UICtrl) {
     return d;
   });
   dataCSV.then(data => {
+    
     data = data;
     update(data);
-  })
+  })*/
   
   
-  
+// function update() called for data stored as an object:
+  update(graphData)
   
 })(budgetController, UIController);
 
